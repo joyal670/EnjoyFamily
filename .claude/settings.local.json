@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(flutter pub:*)",
+      "Bash(flutter analyze:*)",
+      "Bash(rm lib/app_theme.dart lib/home_screen.dart lib/models/cart_item.dart lib/models/dish.dart lib/services/cart_service.dart lib/screens/cart_screen.dart lib/screens/dish_detail_screen.dart lib/screens/menu_screen.dart lib/screens/order_confirmation_screen.dart lib/widgets/app_page_route.dart lib/widgets/cart_badge.dart lib/widgets/dish_card.dart lib/widgets/footer_section.dart lib/widgets/hero_section.dart lib/widgets/menu_section.dart lib/widgets/mobile_bottom_nav.dart lib/widgets/navbar.dart lib/widgets/quantity_selector.dart lib/widgets/scroll_reveal.dart lib/widgets/signature_series.dart lib/widgets/social_proof_section.dart lib/widgets/why_us_section.dart)",
+      "Bash(rmdir lib/models lib/services lib/screens lib/widgets)"
+    ]
+  }
+}
