@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "370194961915",
+    "project_id": "enjoy-family-resturant",
+    "storage_bucket": "enjoy-family-resturant.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:370194961915:android:ad0db85746017fb096a75e",
+        "android_client_info": {
+          "package_name": "com.example.untitled"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3z_vi4otuWcOsXqvTFg8rk5BVDi2LYuM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

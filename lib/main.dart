@@ -1,5 +1,8 @@
+import 'package:familyresturant/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
+import 'core/service/visitor_service.dart';
 import 'core/theme/app_theme.dart';
 import 'features/cart/data/repositories/cart_repository_impl.dart';
 import 'features/cart/domain/usecases/add_to_cart.dart';
@@ -10,7 +13,12 @@ import 'features/cart/presentation/notifiers/cart_notifier.dart';
 import 'features/cart/presentation/providers/cart_provider.dart';
 import 'features/home/presentation/pages/home_page.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  VisitorService.logVisitor();
+
   final cartRepository = CartRepositoryImpl();
   final cartNotifier = CartNotifier(
     addToCart: AddToCart(cartRepository),
