@@ -1,11 +1,11 @@
 {
-    "name": "untitled",
-    "short_name": "untitled",
+    "name": "Family Restaurant",
+    "short_name": "familyresturant",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "A family restaurant app built with Flutter. This app allows users to browse the menu, place orders, and make reservations at their favorite family restaurants. It also includes features like user reviews, restaurant ratings, and a loyalty program for frequent customers.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

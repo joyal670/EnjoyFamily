@@ -1,5 +1,5 @@
 name: familyresturant
-description: "A new Flutter project."
+description: "A family restaurant app built with Flutter. This app allows users to browse the menu, place orders, and make reservations at their favorite family restaurants. It also includes features like user reviews, restaurant ratings, and a loyalty program for frequent customers."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -37,6 +37,7 @@ dependencies:
   firebase_core: ^3.15.2
   cloud_firestore: ^5.0.0
   http: ^1.2.0
+  device_info_plus: ^12.4.0
 
 dev_dependencies:
   flutter_test:
