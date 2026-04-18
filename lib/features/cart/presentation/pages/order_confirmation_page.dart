@@ -1,6 +1,8 @@
 import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import '../../../../core/theme/app_theme.dart';
 
 // ─── Confetti particle data (deterministic) ───────────────────────────────────
@@ -36,9 +38,8 @@ const _kParticles = [
 
 class _CheckCirclePainter extends CustomPainter {
   final double circleProgress; // 0→1: circle stroke draws in
-  final double checkProgress;  // 0→1: check draws in after circle
-  const _CheckCirclePainter(
-      {required this.circleProgress, required this.checkProgress});
+  final double checkProgress; // 0→1: check draws in after circle
+  const _CheckCirclePainter({required this.circleProgress, required this.checkProgress});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -102,8 +103,7 @@ class _CheckCirclePainter extends CustomPainter {
         final path = Path()
           ..moveTo(p1.dx, p1.dy)
           ..lineTo(p2.dx, p2.dy)
-          ..lineTo(p2.dx + (p3.dx - p2.dx) * t,
-              p2.dy + (p3.dy - p2.dy) * t);
+          ..lineTo(p2.dx + (p3.dx - p2.dx) * t, p2.dy + (p3.dy - p2.dy) * t);
         canvas.drawPath(path, checkPaint);
       }
     }
@@ -117,8 +117,7 @@ class _CheckCirclePainter extends CustomPainter {
 
   @override
   bool shouldRepaint(_CheckCirclePainter old) =>
-      old.circleProgress != circleProgress ||
-      old.checkProgress != checkProgress;
+      old.circleProgress != circleProgress || old.checkProgress != checkProgress;
 }
 
 class _ConfettiPainter extends CustomPainter {
@@ -152,32 +151,26 @@ class OrderConfirmationPage extends StatefulWidget {
   const OrderConfirmationPage({super.key});
 
   @override
-  State<OrderConfirmationPage> createState() =>
-      _OrderConfirmationPageState();
+  State<OrderConfirmationPage> createState() => _OrderConfirmationPageState();
 }
 
 class _OrderConfirmationPageState extends State<OrderConfirmationPage>
     with TickerProviderStateMixin {
-  late AnimationController _circleCtrl;   // draws the circle stroke
-  late AnimationController _checkCtrl;    // draws the checkmark
+  late AnimationController _circleCtrl; // draws the circle stroke
+  late AnimationController _checkCtrl; // draws the checkmark
   late AnimationController _confettiCtrl; // particle burst
-  late AnimationController _textCtrl;     // text + card fade in
-  late AnimationController _pulseCtrl;    // pulsing glow ring
+  late AnimationController _textCtrl; // text + card fade in
+  late AnimationController _pulseCtrl; // pulsing glow ring
 
   @override
   void initState() {
     super.initState();
 
-    _circleCtrl = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 650));
-    _checkCtrl = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 450));
-    _confettiCtrl = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 1200));
-    _textCtrl = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 600));
-    _pulseCtrl = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 1800))
+    _circleCtrl = AnimationController(vsync: this, duration: const Duration(milliseconds: 650));
+    _checkCtrl = AnimationController(vsync: this, duration: const Duration(milliseconds: 450));
+    _confettiCtrl = AnimationController(vsync: this, duration: const Duration(milliseconds: 1200));
+    _textCtrl = AnimationController(vsync: this, duration: const Duration(milliseconds: 600));
+    _pulseCtrl = AnimationController(vsync: this, duration: const Duration(milliseconds: 1800))
       ..repeat();
 
     // Sequenced playback
@@ -214,18 +207,13 @@ class _OrderConfirmationPageState extends State<OrderConfirmationPage>
             AnimatedBuilder(
               animation: _confettiCtrl,
               builder: (_, __) => Positioned.fill(
-                child: CustomPaint(
-                  painter: _ConfettiPainter(_confettiCtrl.value),
-                ),
+                child: CustomPaint(painter: _ConfettiPainter(_confettiCtrl.value)),
               ),
             ),
             // Main content
             SingleChildScrollView(
               child: Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: isMobile ? 24 : 80,
-                  vertical: 40,
-                ),
+                padding: EdgeInsets.symmetric(horizontal: isMobile ? 24 : 80, vertical: 40),
                 child: Column(
                   children: [
                     const SizedBox(height: 40),
@@ -298,8 +286,7 @@ class _OrderConfirmationPageState extends State<OrderConfirmationPage>
         child: Column(
           children: [
             ScaleTransition(
-              scale: CurvedAnimation(
-                  parent: _textCtrl, curve: Curves.easeOutBack),
+              scale: CurvedAnimation(parent: _textCtrl, curve: Curves.easeOutBack),
               child: Text(
                 'Order Confirmed!',
                 style: GoogleFonts.playfairDisplay(
@@ -328,12 +315,12 @@ class _OrderConfirmationPageState extends State<OrderConfirmationPage>
     return FadeTransition(
       opacity: CurvedAnimation(parent: _textCtrl, curve: Curves.easeOut),
       child: SlideTransition(
-        position: Tween<Offset>(
-          begin: const Offset(0, 0.15),
-          end: Offset.zero,
-        ).animate(CurvedAnimation(
+        position: Tween<Offset>(begin: const Offset(0, 0.15), end: Offset.zero).animate(
+          CurvedAnimation(
             parent: _textCtrl,
-            curve: const Interval(0.2, 1.0, curve: Curves.easeOutCubic))),
+            curve: const Interval(0.2, 1.0, curve: Curves.easeOutCubic),
+          ),
+        ),
         child: Container(
           width: double.infinity,
           padding: const EdgeInsets.all(24),
@@ -354,7 +341,7 @@ class _OrderConfirmationPageState extends State<OrderConfirmationPage>
               _DetailRow(
                 icon: Icons.location_on_rounded,
                 label: 'Delivering To',
-                value: 'Persia Cluster, Int\'l City',
+                value: 'France Cluster, Int\'l City',
                 color: AppColors.saffron,
               ),
               const SizedBox(height: 16),
@@ -366,19 +353,16 @@ class _OrderConfirmationPageState extends State<OrderConfirmationPage>
               ),
               const SizedBox(height: 20),
               Container(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 16, vertical: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                 decoration: BoxDecoration(
                   color: AppColors.saffron.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(10),
-                  border: Border.all(
-                      color: AppColors.saffron.withOpacity(0.3)),
+                  border: Border.all(color: AppColors.saffron.withOpacity(0.3)),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(Icons.info_outline_rounded,
-                        color: AppColors.saffron, size: 16),
+                    const Icon(Icons.info_outline_rounded, color: AppColors.saffron, size: 16),
                     const SizedBox(width: 8),
                     Text(
                       'We will call to confirm your order',
@@ -401,13 +385,13 @@ class _OrderConfirmationPageState extends State<OrderConfirmationPage>
   Widget _buildHomeButton() {
     return FadeTransition(
       opacity: CurvedAnimation(
-          parent: _textCtrl,
-          curve: const Interval(0.4, 1.0, curve: Curves.easeOut)),
+        parent: _textCtrl,
+        curve: const Interval(0.4, 1.0, curve: Curves.easeOut),
+      ),
       child: Column(
         children: [
           GestureDetector(
-            onTap: () =>
-                Navigator.popUntil(context, (route) => route.isFirst),
+            onTap: () => Navigator.popUntil(context, (route) => route.isFirst),
             child: Container(
               width: double.infinity,
               height: 56,
@@ -419,7 +403,7 @@ class _OrderConfirmationPageState extends State<OrderConfirmationPage>
                     color: AppColors.saffron.withOpacity(0.4),
                     blurRadius: 18,
                     offset: const Offset(0, 6),
-                  )
+                  ),
                 ],
               ),
               child: Center(
@@ -458,11 +442,12 @@ class _DetailRow extends StatelessWidget {
   final String label;
   final String value;
   final Color color;
-  const _DetailRow(
-      {required this.icon,
-      required this.label,
-      required this.value,
-      required this.color});
+  const _DetailRow({
+    required this.icon,
+    required this.label,
+    required this.value,
+    required this.color,
+  });
 
   @override
   Widget build(BuildContext context) {

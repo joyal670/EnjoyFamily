@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import '../../../../core/theme/app_theme.dart';
+import '../../../../core/widgets/app_page_route.dart';
+import '../../../../core/widgets/quantity_selector.dart';
 import '../../domain/entities/cart_item.dart';
 import '../notifiers/cart_notifier.dart';
 import '../providers/cart_provider.dart';
-import '../../../../core/widgets/app_page_route.dart';
-import '../../../../core/widgets/quantity_selector.dart';
 import 'order_confirmation_page.dart';
 
 class CartPage extends StatefulWidget {
@@ -15,8 +16,7 @@ class CartPage extends StatefulWidget {
   State<CartPage> createState() => _CartPageState();
 }
 
-class _CartPageState extends State<CartPage>
-    with SingleTickerProviderStateMixin {
+class _CartPageState extends State<CartPage> with SingleTickerProviderStateMixin {
   late AnimationController _entryCtrl;
   late Animation<double> _entryFade;
 
@@ -25,10 +25,8 @@ class _CartPageState extends State<CartPage>
   @override
   void initState() {
     super.initState();
-    _entryCtrl = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 450),
-    )..forward();
+    _entryCtrl = AnimationController(vsync: this, duration: const Duration(milliseconds: 450))
+      ..forward();
     _entryFade = CurvedAnimation(parent: _entryCtrl, curve: Curves.easeOut);
   }
 
@@ -43,8 +41,7 @@ class _CartPageState extends State<CartPage>
     await Future.delayed(const Duration(milliseconds: 1600));
     if (!mounted) return;
     cart.clear();
-    Navigator.pushReplacement(
-        context, FadeRoute(page: const OrderConfirmationPage()));
+    Navigator.pushReplacement(context, FadeRoute(page: const OrderConfirmationPage()));
   }
 
   @override
@@ -59,8 +56,7 @@ class _CartPageState extends State<CartPage>
         backgroundColor: AppColors.charcoal,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_rounded,
-              color: AppColors.warmBone, size: 20),
+          icon: const Icon(Icons.arrow_back_ios_new_rounded, color: AppColors.warmBone, size: 20),
           onPressed: () => Navigator.pop(context),
         ),
         title: FadeTransition(
@@ -95,13 +91,9 @@ class _CartPageState extends State<CartPage>
       ),
       body: FadeTransition(
         opacity: _entryFade,
-        child: items.isEmpty
-            ? _buildEmpty()
-            : _buildCartContent(items, cart, isMobile),
+        child: items.isEmpty ? _buildEmpty() : _buildCartContent(items, cart, isMobile),
       ),
-      bottomNavigationBar: items.isEmpty
-          ? null
-          : _buildPlaceOrderBar(cart, isMobile),
+      bottomNavigationBar: items.isEmpty ? null : _buildPlaceOrderBar(cart, isMobile),
     );
   }
 
@@ -118,8 +110,11 @@ class _CartPageState extends State<CartPage>
               shape: BoxShape.circle,
               border: Border.all(color: AppColors.glassBorder),
             ),
-            child: Icon(Icons.shopping_bag_outlined,
-                size: 48, color: AppColors.warmBone.withOpacity(0.25)),
+            child: Icon(
+              Icons.shopping_bag_outlined,
+              size: 48,
+              color: AppColors.warmBone.withOpacity(0.25),
+            ),
           ),
           const SizedBox(height: 20),
           Text(
@@ -133,10 +128,7 @@ class _CartPageState extends State<CartPage>
           const SizedBox(height: 8),
           Text(
             'Add dishes from our menu to get started',
-            style: GoogleFonts.montserrat(
-              fontSize: 13,
-              color: AppColors.warmBone.withOpacity(0.4),
-            ),
+            style: GoogleFonts.montserrat(fontSize: 13, color: AppColors.warmBone.withOpacity(0.4)),
           ),
           const SizedBox(height: 32),
           GestureDetector(
@@ -162,11 +154,9 @@ class _CartPageState extends State<CartPage>
     );
   }
 
-  Widget _buildCartContent(
-      List<CartItem> items, CartNotifier cart, bool isMobile) {
+  Widget _buildCartContent(List<CartItem> items, CartNotifier cart, bool isMobile) {
     return ListView(
-      padding: EdgeInsets.symmetric(
-          horizontal: isMobile ? 16 : 40, vertical: 16),
+      padding: EdgeInsets.symmetric(horizontal: isMobile ? 16 : 40, vertical: 16),
       children: [
         // Items
         ...List.generate(items.length, (i) {
@@ -203,7 +193,7 @@ class _CartPageState extends State<CartPage>
             color: Colors.black.withOpacity(0.3),
             blurRadius: 20,
             offset: const Offset(0, -4),
-          )
+          ),
         ],
       ),
       child: Column(
@@ -241,9 +231,7 @@ class _CartPageState extends State<CartPage>
               duration: const Duration(milliseconds: 250),
               height: 56,
               decoration: BoxDecoration(
-                color: _ordering
-                    ? AppColors.saffron.withOpacity(0.6)
-                    : AppColors.saffron,
+                color: _ordering ? AppColors.saffron.withOpacity(0.6) : AppColors.saffron,
                 borderRadius: BorderRadius.circular(14),
                 boxShadow: [
                   if (!_ordering)
@@ -251,7 +239,7 @@ class _CartPageState extends State<CartPage>
                       color: AppColors.saffron.withOpacity(0.4),
                       blurRadius: 18,
                       offset: const Offset(0, 6),
-                    )
+                    ),
                 ],
               ),
               child: Center(
@@ -259,10 +247,7 @@ class _CartPageState extends State<CartPage>
                     ? const SizedBox(
                         width: 24,
                         height: 24,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2.5,
-                          color: Colors.white,
-                        ),
+                        child: CircularProgressIndicator(strokeWidth: 2.5, color: Colors.white),
                       )
                     : Text(
                         'Place Order',
@@ -301,8 +286,7 @@ class _CartItemTile extends StatefulWidget {
   State<_CartItemTile> createState() => _CartItemTileState();
 }
 
-class _CartItemTileState extends State<_CartItemTile>
-    with SingleTickerProviderStateMixin {
+class _CartItemTileState extends State<_CartItemTile> with SingleTickerProviderStateMixin {
   late AnimationController _ctrl;
   late Animation<double> _fade;
   late Animation<Offset> _slide;
@@ -310,10 +294,7 @@ class _CartItemTileState extends State<_CartItemTile>
   @override
   void initState() {
     super.initState();
-    _ctrl = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 400),
-    );
+    _ctrl = AnimationController(vsync: this, duration: const Duration(milliseconds: 400));
     _fade = CurvedAnimation(parent: _ctrl, curve: Curves.easeOut);
     _slide = Tween<Offset>(
       begin: const Offset(0.06, 0),
@@ -349,8 +330,7 @@ class _CartItemTileState extends State<_CartItemTile>
             ),
             alignment: Alignment.centerRight,
             padding: const EdgeInsets.only(right: 20),
-            child: const Icon(Icons.delete_outline_rounded,
-                color: Colors.redAccent, size: 26),
+            child: const Icon(Icons.delete_outline_rounded, color: Colors.redAccent, size: 26),
           ),
           onDismissed: (_) => widget.onRemove(),
           child: Container(
@@ -497,11 +477,10 @@ class _OrderSummaryCard extends StatelessWidget {
           const SizedBox(height: 14),
           Row(
             children: [
-              Icon(Icons.location_on_rounded,
-                  size: 14, color: AppColors.warmBone.withOpacity(0.4)),
+              Icon(Icons.location_on_rounded, size: 14, color: AppColors.warmBone.withOpacity(0.4)),
               const SizedBox(width: 5),
               Text(
-                'Warsan First, Persia Cluster, Dubai',
+                'Warsan First, France Cluster, Dubai',
                 style: GoogleFonts.montserrat(
                   fontSize: 11,
                   color: AppColors.warmBone.withOpacity(0.4),
@@ -525,15 +504,18 @@ class _SummaryRow extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(label,
-            style: GoogleFonts.montserrat(
-                fontSize: 13,
-                color: AppColors.warmBone.withOpacity(0.5))),
-        Text(value,
-            style: GoogleFonts.montserrat(
-                fontSize: 13,
-                fontWeight: FontWeight.w600,
-                color: AppColors.warmBone)),
+        Text(
+          label,
+          style: GoogleFonts.montserrat(fontSize: 13, color: AppColors.warmBone.withOpacity(0.5)),
+        ),
+        Text(
+          value,
+          style: GoogleFonts.montserrat(
+            fontSize: 13,
+            fontWeight: FontWeight.w600,
+            color: AppColors.warmBone,
+          ),
+        ),
       ],
     );
   }
@@ -550,29 +532,35 @@ class _ClearDialog extends StatelessWidget {
     return AlertDialog(
       backgroundColor: AppColors.darkCard,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      title: Text('Clear cart?',
-          style: GoogleFonts.playfairDisplay(
-              color: AppColors.warmBone,
-              fontSize: 20,
-              fontWeight: FontWeight.w700)),
-      content: Text('All items will be removed.',
-          style: GoogleFonts.montserrat(
-              color: AppColors.warmBone.withOpacity(0.6), fontSize: 13)),
+      title: Text(
+        'Clear cart?',
+        style: GoogleFonts.playfairDisplay(
+          color: AppColors.warmBone,
+          fontSize: 20,
+          fontWeight: FontWeight.w700,
+        ),
+      ),
+      content: Text(
+        'All items will be removed.',
+        style: GoogleFonts.montserrat(color: AppColors.warmBone.withOpacity(0.6), fontSize: 13),
+      ),
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: Text('Cancel',
-              style: GoogleFonts.montserrat(
-                  color: AppColors.warmBone.withOpacity(0.5))),
+          child: Text(
+            'Cancel',
+            style: GoogleFonts.montserrat(color: AppColors.warmBone.withOpacity(0.5)),
+          ),
         ),
         TextButton(
           onPressed: () {
             onConfirm();
             Navigator.pop(context);
           },
-          child: Text('Clear',
-              style: GoogleFonts.montserrat(
-                  color: Colors.redAccent, fontWeight: FontWeight.w700)),
+          child: Text(
+            'Clear',
+            style: GoogleFonts.montserrat(color: Colors.redAccent, fontWeight: FontWeight.w700),
+          ),
         ),
       ],
     );

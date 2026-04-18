@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import '../../../../core/theme/app_theme.dart';
-import '../../../cart/presentation/providers/cart_provider.dart';
-import '../../../menu/presentation/pages/menu_page.dart';
-import '../../../cart/presentation/pages/cart_page.dart';
 import '../../../../core/widgets/app_page_route.dart';
 import '../../../../core/widgets/cart_badge.dart';
+import '../../../cart/presentation/pages/cart_page.dart';
+import '../../../cart/presentation/providers/cart_provider.dart';
+import '../../../menu/presentation/pages/menu_page.dart';
 
 class AppNavbar extends StatefulWidget {
   final ScrollController scrollController;
@@ -42,16 +43,14 @@ class _AppNavbarState extends State<AppNavbar> {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
       decoration: BoxDecoration(
-        color: _scrolled
-            ? AppColors.charcoal.withOpacity(0.92)
-            : Colors.transparent,
+        color: _scrolled ? AppColors.charcoal.withOpacity(0.92) : Colors.transparent,
         boxShadow: _scrolled
             ? [
                 BoxShadow(
                   color: Colors.black.withOpacity(0.3),
                   blurRadius: 20,
                   offset: const Offset(0, 4),
-                )
+                ),
               ]
             : [],
       ),
@@ -67,8 +66,7 @@ class _AppNavbarState extends State<AppNavbar> {
               const SizedBox(width: 32),
               // Cart icon
               GestureDetector(
-                onTap: () => Navigator.push(
-                    context, SlideUpRoute(page: const CartPage())),
+                onTap: () => Navigator.push(context, SlideUpRoute(page: const CartPage())),
                 child: CartBadge(
                   count: cart.totalCount,
                   child: MouseRegion(
@@ -81,8 +79,11 @@ class _AppNavbarState extends State<AppNavbar> {
                         borderRadius: BorderRadius.circular(10),
                         border: Border.all(color: AppColors.glassBorder),
                       ),
-                      child: const Icon(Icons.shopping_bag_outlined,
-                          color: AppColors.warmBone, size: 20),
+                      child: const Icon(
+                        Icons.shopping_bag_outlined,
+                        color: AppColors.warmBone,
+                        size: 20,
+                      ),
                     ),
                   ),
                 ),
@@ -106,8 +107,7 @@ class _AppNavbarState extends State<AppNavbar> {
             color: AppColors.saffron,
             borderRadius: BorderRadius.circular(8),
           ),
-          child: const Icon(Icons.local_fire_department_rounded,
-              color: Colors.white, size: 20),
+          child: const Icon(Icons.local_fire_department_rounded, color: Colors.white, size: 20),
         ),
         const SizedBox(width: 12),
         Column(
@@ -115,7 +115,7 @@ class _AppNavbarState extends State<AppNavbar> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'ENJOY FAMILY',
+              'FAMILY',
               style: GoogleFonts.playfairDisplay(
                 fontSize: 16,
                 fontWeight: FontWeight.w700,
@@ -143,8 +143,7 @@ class _AppNavbarState extends State<AppNavbar> {
       children: [
         _NavLink(
           label: 'Menu',
-          onTap: () => Navigator.push(
-              context, SlideUpRoute(page: const MenuPage())),
+          onTap: () => Navigator.push(context, SlideUpRoute(page: const MenuPage())),
         ),
         _NavLink(label: 'About'),
         _NavLink(label: 'Gallery'),
@@ -157,8 +156,7 @@ class _AppNavbarState extends State<AppNavbar> {
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
-        onTap: () =>
-            Navigator.push(context, SlideUpRoute(page: const MenuPage())),
+        onTap: () => Navigator.push(context, SlideUpRoute(page: const MenuPage())),
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
           decoration: BoxDecoration(
@@ -206,9 +204,7 @@ class _NavLinkState extends State<_NavLink> {
           child: AnimatedDefaultTextStyle(
             duration: const Duration(milliseconds: 150),
             style: AppTextStyles.navItem.copyWith(
-              color: _hovered
-                  ? AppColors.saffron
-                  : AppColors.warmBone.withOpacity(0.75),
+              color: _hovered ? AppColors.saffron : AppColors.warmBone.withOpacity(0.75),
             ),
             child: Text(widget.label),
           ),

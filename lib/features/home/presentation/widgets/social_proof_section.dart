@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/widgets/scroll_reveal.dart';
 
@@ -49,10 +50,7 @@ class SocialProofSection extends StatelessWidget {
           colors: [Color(0xFF1A1A1A), Color(0xFF242424)],
         ),
       ),
-      padding: EdgeInsets.symmetric(
-        horizontal: isMobile ? 24 : 80,
-        vertical: isMobile ? 60 : 100,
-      ),
+      padding: EdgeInsets.symmetric(horizontal: isMobile ? 24 : 80, vertical: isMobile ? 60 : 100),
       child: Column(
         children: [
           _buildHeader(isMobile),
@@ -75,146 +73,139 @@ class SocialProofSection extends StatelessWidget {
         Text(
           'Loved by Thousands\nAcross Dubai',
           textAlign: TextAlign.center,
-          style: isMobile
-              ? AppTextStyles.sectionTitleMobile
-              : AppTextStyles.sectionTitle,
+          style: isMobile ? AppTextStyles.sectionTitleMobile : AppTextStyles.sectionTitle,
         ),
       ],
     );
   }
 
   Widget _buildRatingBadge() {
-    return LayoutBuilder(builder: (context, constraints) {
-      // Switch to vertical layout on narrow screens to prevent overflow
-      final isNarrow = constraints.maxWidth < 480;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        // Switch to vertical layout on narrow screens to prevent overflow
+        final isNarrow = constraints.maxWidth < 480;
 
-      final ratingCol = Column(
-        children: [
-          Text(
-            '4.5',
-            style: GoogleFonts.playfairDisplay(
-              fontSize: isNarrow ? 48 : 64,
-              fontWeight: FontWeight.w700,
-              color: AppColors.saffron,
-              height: 1,
-            ),
-          ),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: List.generate(
-              5,
-              (i) => Icon(
-                i < 4 ? Icons.star_rounded : Icons.star_half_rounded,
+        final ratingCol = Column(
+          children: [
+            Text(
+              '4.5',
+              style: GoogleFonts.playfairDisplay(
+                fontSize: isNarrow ? 48 : 64,
+                fontWeight: FontWeight.w700,
                 color: AppColors.saffron,
-                size: isNarrow ? 18 : 22,
+                height: 1,
               ),
             ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            'EXCELLENCE RATING',
-            style: GoogleFonts.montserrat(
-              fontSize: 10,
-              fontWeight: FontWeight.w700,
-              color: AppColors.saffron.withOpacity(0.7),
-              letterSpacing: 2,
-            ),
-          ),
-        ],
-      );
-
-      final statsCol = Column(
-        crossAxisAlignment:
-            isNarrow ? CrossAxisAlignment.center : CrossAxisAlignment.start,
-        children: [
-          _AnimatedStatRow(
-            icon: Icons.people_rounded,
-            target: 10000,
-            suffix: '+',
-            label: 'Happy Guests',
-          ),
-          const SizedBox(height: 12),
-          _AnimatedStatRow(
-            icon: Icons.rate_review_rounded,
-            target: 2400,
-            suffix: '+',
-            label: 'Reviews',
-          ),
-          const SizedBox(height: 12),
-          _StatRow(
-              icon: Icons.emoji_events_rounded,
-              value: '#1',
-              label: 'In Persia Cluster'),
-        ],
-      );
-
-      return Container(
-        width: double.infinity,
-        padding: EdgeInsets.symmetric(
-          horizontal: isNarrow ? 20 : 40,
-          vertical: 28,
-        ),
-        decoration: BoxDecoration(
-          gradient: const LinearGradient(
-            colors: [Color(0xFF2D1A05), Color(0xFF1A1005)],
-          ),
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: AppColors.saffron.withOpacity(0.3)),
-        ),
-        child: isNarrow
-            ? Column(
-                children: [
-                  ratingCol,
-                  const SizedBox(height: 20),
-                  Container(
-                    width: 60,
-                    height: 1,
-                    color: AppColors.saffron.withOpacity(0.2),
-                  ),
-                  const SizedBox(height: 20),
-                  statsCol,
-                ],
-              )
-            : Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  ratingCol,
-                  Container(
-                    width: 1,
-                    height: 80,
-                    color: AppColors.saffron.withOpacity(0.2),
-                    margin: const EdgeInsets.symmetric(horizontal: 32),
-                  ),
-                  statsCol,
-                ],
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: List.generate(
+                5,
+                (i) => Icon(
+                  i < 4 ? Icons.star_rounded : Icons.star_half_rounded,
+                  color: AppColors.saffron,
+                  size: isNarrow ? 18 : 22,
+                ),
               ),
-      );
-    });
+            ),
+            const SizedBox(height: 4),
+            Text(
+              'EXCELLENCE RATING',
+              style: GoogleFonts.montserrat(
+                fontSize: 10,
+                fontWeight: FontWeight.w700,
+                color: AppColors.saffron.withOpacity(0.7),
+                letterSpacing: 2,
+              ),
+            ),
+          ],
+        );
+
+        final statsCol = Column(
+          crossAxisAlignment: isNarrow ? CrossAxisAlignment.center : CrossAxisAlignment.start,
+          children: [
+            _AnimatedStatRow(
+              icon: Icons.people_rounded,
+              target: 10000,
+              suffix: '+',
+              label: 'Happy Guests',
+            ),
+            const SizedBox(height: 12),
+            _AnimatedStatRow(
+              icon: Icons.rate_review_rounded,
+              target: 2400,
+              suffix: '+',
+              label: 'Reviews',
+            ),
+            const SizedBox(height: 12),
+            _StatRow(icon: Icons.emoji_events_rounded, value: '#1', label: 'In France Cluster'),
+          ],
+        );
+
+        return Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(horizontal: isNarrow ? 20 : 40, vertical: 28),
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(colors: [Color(0xFF2D1A05), Color(0xFF1A1005)]),
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: AppColors.saffron.withOpacity(0.3)),
+          ),
+          child: isNarrow
+              ? Column(
+                  children: [
+                    ratingCol,
+                    const SizedBox(height: 20),
+                    Container(width: 60, height: 1, color: AppColors.saffron.withOpacity(0.2)),
+                    const SizedBox(height: 20),
+                    statsCol,
+                  ],
+                )
+              : Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    ratingCol,
+                    Container(
+                      width: 1,
+                      height: 80,
+                      color: AppColors.saffron.withOpacity(0.2),
+                      margin: const EdgeInsets.symmetric(horizontal: 32),
+                    ),
+                    statsCol,
+                  ],
+                ),
+        );
+      },
+    );
   }
 
   Widget _buildReviews(bool isMobile) {
     if (isMobile) {
       return Column(
-        children: List.generate(_reviews.length, (i) => Padding(
-          padding: const EdgeInsets.only(bottom: 16),
-          child: ScrollReveal(
-            delay: Duration(milliseconds: 120 * i),
-            child: _ReviewCard(review: _reviews[i]),
+        children: List.generate(
+          _reviews.length,
+          (i) => Padding(
+            padding: const EdgeInsets.only(bottom: 16),
+            child: ScrollReveal(
+              delay: Duration(milliseconds: 120 * i),
+              child: _ReviewCard(review: _reviews[i]),
+            ),
           ),
-        )),
+        ),
       );
     }
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: List.generate(_reviews.length, (i) => Expanded(
-        child: Padding(
-          padding: EdgeInsets.only(right: i < _reviews.length - 1 ? 20 : 0),
-          child: ScrollReveal(
-            delay: Duration(milliseconds: 110 * i),
-            child: _ReviewCard(review: _reviews[i]),
+      children: List.generate(
+        _reviews.length,
+        (i) => Expanded(
+          child: Padding(
+            padding: EdgeInsets.only(right: i < _reviews.length - 1 ? 20 : 0),
+            child: ScrollReveal(
+              delay: Duration(milliseconds: 110 * i),
+              child: _ReviewCard(review: _reviews[i]),
+            ),
           ),
         ),
-      )),
+      ),
     );
   }
 
@@ -235,14 +226,7 @@ class SocialProofSection extends StatelessWidget {
       Icons.local_cafe_rounded,
       Icons.restaurant_rounded,
     ];
-    final labels = [
-      'Bonfire Pizza',
-      'Karahi',
-      'Breakfast',
-      'Biryani',
-      'Beverages',
-      'Tandoori',
-    ];
+    final labels = ['Bonfire Pizza', 'Karahi', 'Breakfast', 'Biryani', 'Beverages', 'Tandoori'];
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -261,11 +245,7 @@ class SocialProofSection extends StatelessWidget {
           itemCount: 6,
           itemBuilder: (_, i) => ScrollReveal(
             delay: Duration(milliseconds: 60 * i),
-            child: _PhotoCard(
-              color: colors[i],
-              icon: icons[i],
-              label: labels[i],
-            ),
+            child: _PhotoCard(color: colors[i], icon: icons[i], label: labels[i]),
           ),
         ),
       ],
@@ -277,8 +257,7 @@ class _StatRow extends StatelessWidget {
   final IconData icon;
   final String value;
   final String label;
-  const _StatRow(
-      {required this.icon, required this.value, required this.label});
+  const _StatRow({required this.icon, required this.value, required this.label});
 
   @override
   Widget build(BuildContext context) {
@@ -401,8 +380,7 @@ class _ReviewCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: AppColors.saffron.withOpacity(0.2),
                   shape: BoxShape.circle,
-                  border: Border.all(
-                      color: AppColors.saffron.withOpacity(0.4)),
+                  border: Border.all(color: AppColors.saffron.withOpacity(0.4)),
                 ),
                 child: Center(
                   child: Text(
@@ -448,8 +426,7 @@ class _PhotoCard extends StatefulWidget {
   final Color color;
   final IconData icon;
   final String label;
-  const _PhotoCard(
-      {required this.color, required this.icon, required this.label});
+  const _PhotoCard({required this.color, required this.icon, required this.label});
 
   @override
   State<_PhotoCard> createState() => _PhotoCardState();
@@ -470,25 +447,16 @@ class _PhotoCardState extends State<_PhotoCard> {
           color: widget.color,
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
-            color: _hovered
-                ? AppColors.saffron.withOpacity(0.5)
-                : AppColors.glassBorder,
+            color: _hovered ? AppColors.saffron.withOpacity(0.5) : AppColors.glassBorder,
           ),
           boxShadow: _hovered
-              ? [
-                  BoxShadow(
-                    color: AppColors.saffron.withOpacity(0.1),
-                    blurRadius: 20,
-                  )
-                ]
+              ? [BoxShadow(color: AppColors.saffron.withOpacity(0.1), blurRadius: 20)]
               : [],
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(widget.icon,
-                color: AppColors.saffron.withOpacity(_hovered ? 1 : 0.7),
-                size: 36),
+            Icon(widget.icon, color: AppColors.saffron.withOpacity(_hovered ? 1 : 0.7), size: 36),
             const SizedBox(height: 10),
             Text(
               widget.label,
